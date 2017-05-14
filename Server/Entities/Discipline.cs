@@ -3,14 +3,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("Disciplines")]
-public class Discipline
+public class Discipline : BasicEntity
 {
     public Discipline()
     {
         Teachers = new List<Teacher>();
     }
 
-    public int ID { get; set; }
     [Required]
     public string Name { get; set; }
 

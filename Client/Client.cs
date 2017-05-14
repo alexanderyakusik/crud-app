@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Client
 {
-    static class Program
+    static class Client
     {
         /// <summary>
         /// Главная точка входа для приложения.
