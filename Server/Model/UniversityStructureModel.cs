@@ -7,7 +7,7 @@
         public UniversityStructureModel()
             : base("name=UniversityStructureModel")
         {
-
+            Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -9,5 +9,5 @@ public class Faculty : BasicEntity
 
     public string Name { get; set; }
 
-    public virtual List<Chair> Chairs { get; set; }
+    public virtual ICollection<Chair> Chairs { get; set; }
 }

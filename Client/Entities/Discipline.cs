@@ -9,5 +9,5 @@ public class Discipline : BasicEntity
 
     public string Name { get; set; }
 
-    public virtual List<Teacher> Teachers { get; set; }
+    public virtual ICollection<Teacher> Teachers { get; set; }
 }

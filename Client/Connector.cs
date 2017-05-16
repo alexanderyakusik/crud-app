@@ -1,19 +1,17 @@
 ﻿using System;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 
 namespace Client
 {
-    public class Connector
+    public static class Connector
     {
-        //public IChannel GetChannel()
-        //{
-        //    Uri address = new Uri("http://192.168.1.1:4000/IContract");
-        //    BasicHttpBinding binding = new BasicHttpBinding();
-        //    EndpointAddress endpoint = new EndpointAddress(address);
-        //    ChannelFactory<> factory = new ChannelFactory<>(binding, endpoint);
+        public static T GetChannel<T>(Uri address)
+        {
+            var binding = new BasicHttpBinding();
+            var endpoint = new EndpointAddress(address);
+            var factory = new ChannelFactory<T>(binding, endpoint);
 
-        //    return factory.CreateChannel();
-        //}
+            return factory.CreateChannel();
+        }
     }
 }

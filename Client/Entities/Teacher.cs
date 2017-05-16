@@ -12,5 +12,5 @@ public class Teacher : BasicEntity
     public int ChairID { get; set; }
     public virtual Chair Chair { get; set; }
 
-    public virtual List<Discipline> Disciplines { get; set; }
+    public virtual ICollection<Discipline> Disciplines { get; set; }
 }

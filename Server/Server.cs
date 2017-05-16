@@ -11,10 +11,10 @@ namespace Server
         static void Main(string[] args)
         {
             List<Uri> addresses = new List<Uri>();
-            addresses.Add(new Uri("http://192.168.25.1:30001/Faculties"));
-            addresses.Add(new Uri("http://192.168.25.1:30001/Chairs"));
-            addresses.Add(new Uri("http://192.168.25.1:30001/Disciplines"));
-            addresses.Add(new Uri("http://192.168.25.1:30001/Teachers"));
+            addresses.Add(new Uri("http://127.0.0.1:30001/Faculties"));
+            addresses.Add(new Uri("http://127.0.0.1:30001/Chairs"));
+            addresses.Add(new Uri("http://127.0.0.1:30001/Disciplines"));
+            addresses.Add(new Uri("http://127.0.0.1:30001/Teachers"));
 
             InitializeServiceHosts();
             AddServiceHostWithEndpoint<Faculty>(addresses[0]);
