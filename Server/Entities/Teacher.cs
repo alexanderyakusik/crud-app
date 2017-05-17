@@ -7,8 +7,6 @@ public class Teacher : BasicEntity
         Disciplines = new List<Discipline>();
     }
 
-    public string FullName { get; set; }
-
     public int ChairID { get; set; }
     public virtual Chair Chair { get; set; }
 

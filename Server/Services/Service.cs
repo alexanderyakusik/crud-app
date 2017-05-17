@@ -100,7 +100,6 @@ namespace Server
 
         public bool Update(int updatingID, T newEntity)
         {
-            // TODO
             try
             {
                 using (var dbContext = new UniversityStructureModel())

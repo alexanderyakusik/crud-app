@@ -13,14 +13,14 @@ namespace Server
             List<Uri> addresses = new List<Uri>();
             addresses.Add(new Uri("http://127.0.0.1:30001/Faculties"));
             addresses.Add(new Uri("http://127.0.0.1:30001/Chairs"));
-            addresses.Add(new Uri("http://127.0.0.1:30001/Disciplines"));
             addresses.Add(new Uri("http://127.0.0.1:30001/Teachers"));
+            addresses.Add(new Uri("http://127.0.0.1:30001/Disciplines"));
 
             InitializeServiceHosts();
             AddServiceHostWithEndpoint<Faculty>(addresses[0]);
             AddServiceHostWithEndpoint<Chair>(addresses[1]);
-            AddServiceHostWithEndpoint<Discipline>(addresses[2]);
-            AddServiceHostWithEndpoint<Teacher>(addresses[3]);
+            AddServiceHostWithEndpoint<Teacher>(addresses[2]);
+            AddServiceHostWithEndpoint<Discipline>(addresses[3]);
 
             OpenHost<Faculty>();
             OpenHost<Chair>();

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 
 [ServiceContract]
-interface IContract<T>
+public interface IContract<T>
 {
     // Reading data
     [OperationContract]

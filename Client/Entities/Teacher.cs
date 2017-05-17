@@ -7,10 +7,8 @@ public class Teacher : BasicEntity
         Disciplines = new List<Discipline>();
     }
 
-    public string FullName { get; set; }
-
     public int ChairID { get; set; }
     public virtual Chair Chair { get; set; }
 
-    public virtual ICollection<Discipline> Disciplines { get; set; }
+    public virtual List<Discipline> Disciplines { get; set; }
 }

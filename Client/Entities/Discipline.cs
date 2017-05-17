@@ -7,7 +7,5 @@ public class Discipline : BasicEntity
         Teachers = new List<Teacher>();
     }
 
-    public string Name { get; set; }
-
-    public virtual ICollection<Teacher> Teachers { get; set; }
+    public virtual List<Teacher> Teachers { get; set; }
 }

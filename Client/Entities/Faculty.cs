@@ -7,7 +7,5 @@ public class Faculty : BasicEntity
         Chairs = new List<Chair>();
     }
 
-    public string Name { get; set; }
-
-    public virtual ICollection<Chair> Chairs { get; set; }
+    public virtual List<Chair> Chairs { get; set; }
 }

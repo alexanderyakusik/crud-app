@@ -6,8 +6,6 @@ public class Chair : BasicEntity
     {
         Teachers = new List<Teacher>();
     }
-
-    public string Name { get; set; }
     
     public int FacultyID { get; set; }
     public virtual Faculty Faculty { get; set; }
