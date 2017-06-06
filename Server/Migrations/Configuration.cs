@@ -1,4 +1,4 @@
-namespace Server
+namespace Server.Migrations
 {
     using System.Data.Entity.Migrations;
 
@@ -12,7 +12,7 @@ namespace Server
 
         protected override void Seed(UniversityStructureModel context)
         {
-
+            
         }
     }
 }

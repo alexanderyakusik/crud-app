@@ -41,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +54,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connector.cs" />
@@ -61,6 +64,36 @@
     <Compile Include="Entities\Discipline.cs" />
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\Teacher.cs" />
+    <Compile Include="FormAddTeacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddTeacher.Designer.cs">
+      <DependentUpon>FormAddTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddDiscipline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddDiscipline.Designer.cs">
+      <DependentUpon>FormAddDiscipline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddChair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddChair.Designer.cs">
+      <DependentUpon>FormAddChair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddFaculty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddFaculty.Designer.cs">
+      <DependentUpon>FormAddFaculty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChooseType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChooseType.Designer.cs">
+      <DependentUpon>FormChooseType.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +102,21 @@
     </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAddTeacher.resx">
+      <DependentUpon>FormAddTeacher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddDiscipline.resx">
+      <DependentUpon>FormAddDiscipline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddChair.resx">
+      <DependentUpon>FormAddChair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddFaculty.resx">
+      <DependentUpon>FormAddFaculty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChooseType.resx">
+      <DependentUpon>FormChooseType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

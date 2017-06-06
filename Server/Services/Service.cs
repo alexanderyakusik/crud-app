@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -12,6 +13,11 @@ namespace Server
             {
                 using (var dbContext = new UniversityStructureModel())
                 {
+                    AttachCollectionItems(entity, dbContext);
+                    if (entity.ID == 0)
+                    {
+                        entity.ID = dbContext.Set<T>().OrderByDescending((T item) => item.ID).FirstOrDefault().ID + 1;
+                    }
                     dbContext.Set<T>().Add(entity);
                     dbContext.SaveChanges();
                 }
@@ -51,7 +57,8 @@ namespace Server
                 PropertyInfo collectionProperty = null;
                 foreach (PropertyInfo propInfo in typeof(T).GetProperties())
                 {
-                    if (propInfo.PropertyType.IsGenericType)
+                    if ((propInfo.PropertyType.IsGenericType) &&
+                        (propInfo.PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
                     {
                         collectionName = propInfo.Name;
                         collectionProperty = propInfo;
@@ -66,23 +73,36 @@ namespace Server
                 }
                 else
                 {
-                    entityObject = dbContext.Set<T>().Include(collectionName).First((T entity) => entity.ID == ID);
+                    try
+                    {
+                        entityObject = dbContext.Set<T>().Include(collectionName).First((T entity) => entity.ID == ID);
+                    }
+                    catch
+                    {
+                        return null;
+                    }
                     dynamic list = collectionProperty.GetValue(entityObject);
-                    PropertyInfo recursiveCollectionProperty = null;
+                    List<PropertyInfo> virtualProperties = new List<PropertyInfo>();
                     foreach (var childObject in list)
                     {
-                        if (recursiveCollectionProperty == null)
+                        if (virtualProperties.Count == 0)
                         {
                             foreach (PropertyInfo propInfo in childObject.GetType().GetProperties())
                             {
-                                if (propInfo.PropertyType.IsGenericType)
+                                if (propInfo.GetGetMethod().IsVirtual)
                                 {
-                                    recursiveCollectionProperty = propInfo;
-                                    break;
+                                    virtualProperties.Add(propInfo);
                                 }
                             }
+                            if (virtualProperties.Count == 0)
+                            {
+                                break;
+                            }
                         }
-                        recursiveCollectionProperty.SetValue(childObject, default(List<T>));
+                        foreach (PropertyInfo virtualProp in virtualProperties)
+                        {
+                            virtualProp.SetValue(childObject, null);
+                        }
                     }
                 }
 
@@ -104,8 +124,10 @@ namespace Server
             {
                 using (var dbContext = new UniversityStructureModel())
                 {
+                    newEntity.ID = updatingID;
                     Delete(updatingID);
                     Create(newEntity);
+                    dbContext.SaveChanges();
                 }
             }
             catch
@@ -114,6 +136,23 @@ namespace Server
             }
 
             return true;
+        }
+
+        private void AttachCollectionItems(T entity, UniversityStructureModel dbContext)
+        {
+            foreach (PropertyInfo propInfo in entity.GetType().GetProperties())
+            {
+                if (propInfo.PropertyType.IsGenericType &&
+                    propInfo.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+                {
+                    Type propType = propInfo.PropertyType.GetGenericArguments()[0];
+                    dynamic list = propInfo.GetValue(entity);
+                    foreach (dynamic item in list)
+                    {
+                        dbContext.Set(propType).Attach(item);
+                    }
+                }
+            }
         }
     }
 }

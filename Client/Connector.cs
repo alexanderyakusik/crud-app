@@ -16,5 +16,13 @@ namespace Client
 
             return factory.CreateChannel();
         }
+        
+        public static void InitializeChannels(List<Uri> addresses)
+        {
+            Channels.Add(typeof(Faculty), CreateChannel<IContract<Faculty>>(addresses[0]));
+            Channels.Add(typeof(Chair), CreateChannel<IContract<Chair>>(addresses[1]));
+            Channels.Add(typeof(Teacher), CreateChannel<IContract<Teacher>>(addresses[2]));
+            Channels.Add(typeof(Discipline), CreateChannel<IContract<Discipline>>(addresses[3]));
+        }
     }
 }

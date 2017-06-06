@@ -56,6 +56,7 @@
             this.ButtonDelete.TabIndex = 2;
             this.ButtonDelete.Text = "Delete";
             this.ButtonDelete.UseVisualStyleBackColor = true;
+            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // ButtonUpdate
             // 
@@ -65,6 +66,7 @@
             this.ButtonUpdate.TabIndex = 1;
             this.ButtonUpdate.Text = "Update";
             this.ButtonUpdate.UseVisualStyleBackColor = true;
+            this.ButtonUpdate.Click += new System.EventHandler(this.ButtonUpdate_Click);
             // 
             // ButtonCreate
             // 
@@ -74,6 +76,7 @@
             this.ButtonCreate.TabIndex = 0;
             this.ButtonCreate.Text = "Create";
             this.ButtonCreate.UseVisualStyleBackColor = true;
+            this.ButtonCreate.Click += new System.EventHandler(this.ButtonCreate_Click);
             // 
             // TreeViewMain
             // 
@@ -93,7 +96,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Лабораторная работа №3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.PanelButtons.ResumeLayout(false);
             this.ResumeLayout(false);

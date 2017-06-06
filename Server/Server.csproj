@@ -67,9 +67,9 @@
     <Compile Include="Entities\Faculty.cs" />
     <Compile Include="Entities\Teacher.cs" />
     <Compile Include="Contracts\IContract.cs" />
-    <Compile Include="Migrations\201705141341003_UpdatedDatabase.cs" />
-    <Compile Include="Migrations\201705141341003_UpdatedDatabase.Designer.cs">
-      <DependentUpon>201705141341003_UpdatedDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201706011827271_Initial.cs" />
+    <Compile Include="Migrations\201706011827271_Initial.Designer.cs">
+      <DependentUpon>201706011827271_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Server.cs" />
@@ -82,10 +82,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705141341003_UpdatedDatabase.resx">
-      <DependentUpon>201705141341003_UpdatedDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706011827271_Initial.resx">
+      <DependentUpon>201706011827271_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

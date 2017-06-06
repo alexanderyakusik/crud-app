@@ -1,9 +1,9 @@
-namespace Server
+namespace Server.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdatedDatabase : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -11,19 +11,19 @@ namespace Server
                 "dbo.Chairs",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        ID = c.Int(nullable: false),
+                        FacultyID = c.Int(),
                         Name = c.String(unicode: false),
-                        FacultyID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Faculties", t => t.FacultyID, cascadeDelete: true)
+                .ForeignKey("dbo.Faculties", t => t.FacultyID)
                 .Index(t => t.FacultyID);
             
             CreateTable(
                 "dbo.Faculties",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        ID = c.Int(nullable: false),
                         Name = c.String(unicode: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -32,49 +32,49 @@ namespace Server
                 "dbo.Teachers",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        FullName = c.String(unicode: false),
-                        ChairID = c.Int(nullable: false),
+                        ID = c.Int(nullable: false),
+                        ChairID = c.Int(),
+                        Name = c.String(unicode: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Chairs", t => t.ChairID, cascadeDelete: true)
+                .ForeignKey("dbo.Chairs", t => t.ChairID)
                 .Index(t => t.ChairID);
             
             CreateTable(
                 "dbo.Disciplines",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        ID = c.Int(nullable: false),
                         Name = c.String(unicode: false),
                     })
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.DisciplineTeachers",
+                "dbo.TeacherDisciplines",
                 c => new
                     {
-                        Discipline_ID = c.Int(nullable: false),
                         Teacher_ID = c.Int(nullable: false),
+                        Discipline_ID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Discipline_ID, t.Teacher_ID })
-                .ForeignKey("dbo.Disciplines", t => t.Discipline_ID, cascadeDelete: true)
+                .PrimaryKey(t => new { t.Teacher_ID, t.Discipline_ID })
                 .ForeignKey("dbo.Teachers", t => t.Teacher_ID, cascadeDelete: true)
-                .Index(t => t.Discipline_ID)
-                .Index(t => t.Teacher_ID);
+                .ForeignKey("dbo.Disciplines", t => t.Discipline_ID, cascadeDelete: true)
+                .Index(t => t.Teacher_ID)
+                .Index(t => t.Discipline_ID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.DisciplineTeachers", "Teacher_ID", "dbo.Teachers");
-            DropForeignKey("dbo.DisciplineTeachers", "Discipline_ID", "dbo.Disciplines");
+            DropForeignKey("dbo.TeacherDisciplines", "Discipline_ID", "dbo.Disciplines");
+            DropForeignKey("dbo.TeacherDisciplines", "Teacher_ID", "dbo.Teachers");
             DropForeignKey("dbo.Teachers", "ChairID", "dbo.Chairs");
             DropForeignKey("dbo.Chairs", "FacultyID", "dbo.Faculties");
-            DropIndex("dbo.DisciplineTeachers", new[] { "Teacher_ID" });
-            DropIndex("dbo.DisciplineTeachers", new[] { "Discipline_ID" });
+            DropIndex("dbo.TeacherDisciplines", new[] { "Discipline_ID" });
+            DropIndex("dbo.TeacherDisciplines", new[] { "Teacher_ID" });
             DropIndex("dbo.Teachers", new[] { "ChairID" });
             DropIndex("dbo.Chairs", new[] { "FacultyID" });
-            DropTable("dbo.DisciplineTeachers");
+            DropTable("dbo.TeacherDisciplines");
             DropTable("dbo.Disciplines");
             DropTable("dbo.Teachers");
             DropTable("dbo.Faculties");
